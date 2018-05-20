@@ -13,9 +13,9 @@ repositories {
 
 gradlePlugin {
     (plugins) {
-//        "greetingPlugin" {
-//            id = "$group.hello-plugin"
-//            implementationClass = "$group.plugin.greeting.GreetingPlugin"
-//        }
+        "kt-jaxb-plugin" {
+            id = "com.github.alexbogovich.kt-jaxb-plugin"
+            implementationClass = "com.github.alexbogovich.jaxbplugin.JaxbPlugin"
+        }
     }
 }
