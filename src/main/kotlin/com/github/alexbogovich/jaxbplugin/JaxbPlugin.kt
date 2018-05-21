@@ -13,11 +13,8 @@ open class JaxbPlugin: Plugin<Project> {
                 group = "jaxb-plugin"
 
                 "jaxb"(JaxbTask::class) {
-//                    xsdDir.set(jaxbExtension.xsdDir)
-//                    bindings.set(jaxbExtension.bindings)
-//                    bindingsDir.set(jaxbExtension.bindingsDir)
                     episodesDir.set(jaxbExtension.episodesDir)
-//                    xsdIncludes.set(jaxbExtension.xsdIncludes)
+                    bindings.set(jaxbExtension.bindings)
                     xsd.set(jaxbExtension.xsd)
                 }
             }
