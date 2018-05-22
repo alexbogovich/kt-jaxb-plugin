@@ -1,6 +1,7 @@
 package com.github.alexbogovich.jaxbplugin
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.FileCollection
 import org.gradle.api.file.FileTree
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
@@ -18,22 +19,20 @@ open class JaxbTask: DefaultTask() {
     val bindings = project.objects.property<FileTree>()
 
     @get:InputFiles
-    val xsd = project.objects.property<FileTree>()
+    val xsd = project.objects.property<FileCollection>()
 
     @TaskAction
     fun runJaxbTransormation() {
-        println("xsd = ${xsd.get()}")
-        xsd.get().visit {
-            if (!isDirectory) {
-                println("process $relativePath $file")
-            }
+        logger.info("Start jaxb")
+        xsd.orNull?.files!!.forEach {
+            logger.info("process ${it.absoluteFile}")
         }
 
         bindings.orNull?.run {
-            println("bindings = $this")
+            logger.info("bindings = $this")
             visit {
                 if (!isDirectory) {
-                    println("process $relativePath $file")
+                    logger.info("process $relativePath $file")
                 }
             }
         }

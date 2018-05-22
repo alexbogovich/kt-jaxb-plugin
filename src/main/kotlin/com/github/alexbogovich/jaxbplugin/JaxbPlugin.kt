@@ -12,10 +12,16 @@ open class JaxbPlugin: Plugin<Project> {
             tasks {
                 group = "jaxb-plugin"
 
+                val treeTask = "dependencyTree"(DependencyTreeTask::class) {
+                    xsd.set(jaxbExtension.xsd)
+                }
+
                 "jaxb"(JaxbTask::class) {
+                    dependsOn(treeTask)
+
                     episodesDir.set(jaxbExtension.episodesDir)
                     bindings.set(jaxbExtension.bindings)
-                    xsd.set(jaxbExtension.xsd)
+                    xsd.set(treeTask.treeRootXsd)
                 }
             }
         }
