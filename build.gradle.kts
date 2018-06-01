@@ -19,3 +19,7 @@ gradlePlugin {
         }
     }
 }
+
+dependencies {
+    compile("org.jetbrains.kotlinx:kotlinx.dom:0.0.10")
+}
