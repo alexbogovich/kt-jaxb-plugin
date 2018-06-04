@@ -4,8 +4,8 @@ plugins {
     `kotlin-dsl`
 }
 
-group   = "com.github.alexbogovich"
-version = "0.1"
+group   = "io.github.alexbogovich"
+version = "0.2"
 
 repositories {
     jcenter()
@@ -14,8 +14,12 @@ repositories {
 gradlePlugin {
     (plugins) {
         "kt-jaxb-plugin" {
-            id = "com.github.alexbogovich.kt-jaxb-plugin"
-            implementationClass = "com.github.alexbogovich.jaxbplugin.JaxbPlugin"
+            id = "io.github.alexbogovich.kt-jaxb-plugin"
+            implementationClass = "io.github.alexbogovich.jaxbplugin.JaxbPlugin"
         }
     }
+}
+
+dependencies {
+    compile("org.jetbrains.kotlinx:kotlinx.dom:0.0.10")
 }
