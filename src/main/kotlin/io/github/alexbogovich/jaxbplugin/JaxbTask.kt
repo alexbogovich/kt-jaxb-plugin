@@ -4,6 +4,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.FileTree
 import org.gradle.api.tasks.*
+import org.gradle.kotlin.dsl.listProperty
 import org.gradle.kotlin.dsl.property
 import org.gradle.kotlin.dsl.withGroovyBuilder
 import java.io.File
@@ -21,13 +22,14 @@ open class JaxbTask : DefaultTask() {
     val xsd = project.objects.property<FileCollection>()
 
     @get:InputFile
+    @Optional
     val catalog = project.objects.property<File>()
 
     @get:OutputDirectory
     val destdir = project.objects.property<File>()
 
     @get:Input
-    val args = project.objects.property<List<String>>()
+    val args = project.objects.listProperty<String>()
 
     val config = project.files()
 
@@ -58,10 +60,14 @@ open class JaxbTask : DefaultTask() {
             "xjc"("destdir" to destdir.get().absolutePath,
                     "extension" to true,
                     "removeOldOutput" to "yes",
-                    "header" to true,
-                    "catalog" to catalog.get().absolutePath) {
+                    "header" to true) {
                 xsd.get().addToAntBuilder(ant, "schema", FileCollection.AntType.FileSet)
                 bindings.get().addToAntBuilder(ant, "binding", FileCollection.AntType.FileSet)
+
+
+                if (catalog.isPresent) {
+                    "arg"("value" to "-catalog ${catalog.get().absolutePath}")
+                }
 
                 args.get().forEach {
                     "arg"("value" to it)

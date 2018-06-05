@@ -26,11 +26,16 @@ open class JaxbPlugin: Plugin<Project> {
                 "jaxb"(JaxbTask::class) {
                     dependsOn(treeTask)
 
-                    episodesDir.set(jaxbExtension.episodesDir)
+                    if (jaxbExtension.episodesDir.isPresent) {
+                        episodesDir.set(jaxbExtension.episodesDir)
+                    }
+                    if (jaxbExtension.catalog.isPresent) {
+                        catalog.set(jaxbExtension.catalog)
+                    }
+
                     bindings.set(jaxbExtension.bindings)
                     xsd.set(treeTask.treeRootXsd)
                     config.setFrom(jaxbConfiguration)
-                    catalog.set(jaxbExtension.catalog)
                     destdir.set(jaxbExtension.destdir)
                     args.set(jaxbExtension.args)
                 }
