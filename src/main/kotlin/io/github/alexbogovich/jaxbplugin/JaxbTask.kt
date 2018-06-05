@@ -66,6 +66,12 @@ open class JaxbTask : DefaultTask() {
                 args.get().forEach {
                     "arg"("value" to it)
                 }
+
+                "arg"("value" to "-classpath")
+                "arg"("value" to config.asPath)
+                "arg"("value" to "-debug")
+                "arg"("value" to "-verbose")
+
             }
         }
     }
