@@ -7,7 +7,7 @@ plugins {
 
 
 group   = "io.github.alexbogovich"
-version = "0.2"
+version = "0.2.1"
 val ktJaxbPlugin = "kt-jaxb-plugin"
 val ktJaxbPluginId = "${project.group}.$ktJaxbPlugin"
 

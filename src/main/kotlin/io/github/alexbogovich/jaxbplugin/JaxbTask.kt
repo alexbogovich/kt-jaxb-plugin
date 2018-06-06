@@ -3,6 +3,7 @@ package io.github.alexbogovich.jaxbplugin
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.FileTree
+import org.gradle.api.logging.LogLevel
 import org.gradle.api.tasks.*
 import org.gradle.kotlin.dsl.listProperty
 import org.gradle.kotlin.dsl.property
@@ -75,8 +76,12 @@ open class JaxbTask : DefaultTask() {
 
                 "arg"("value" to "-classpath")
                 "arg"("value" to config.asPath)
-                "arg"("value" to "-debug")
-                "arg"("value" to "-verbose")
+                if (logger.isEnabled(LogLevel.DEBUG)) {
+                    "arg"("value" to "-debug")
+                }
+                if (logger.isEnabled(LogLevel.INFO)) {
+                    "arg"("value" to "-verbose")
+                }
 
             }
         }
