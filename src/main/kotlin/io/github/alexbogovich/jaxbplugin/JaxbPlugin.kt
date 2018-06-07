@@ -13,12 +13,13 @@ open class JaxbPlugin: Plugin<Project> {
                     .setTransitive(true)
                     .setDescription("jaxb")
 
-            jaxbConfiguration.defaultDependencies {
+            jaxbConfiguration.withDependencies {
                 add(dependencies.create("org.glassfish.jaxb","jaxb-xjc","2.2.11"))
                 add(dependencies.create("org.glassfish.jaxb","jaxb-runtime","2.2.11"))
                 add(dependencies.create("org.jvnet.jaxb2_commons","jaxb2-basics-ant","1.11.1"))
                 add(dependencies.create("org.jvnet.jaxb2_commons","jaxb2-basics","1.11.1"))
                 add(dependencies.create("org.jvnet.jaxb2_commons","jaxb2-basics-annotate","1.0.4"))
+                add(dependencies.create("org.slf4j","slf4j-simple","1.7.25"))
                 add(dependencies.create("javax.xml.bind", "jaxb-api", "2.3.0"))
                 add(dependencies.create("javax.activation", "activation", "1.1.1"))
             }
