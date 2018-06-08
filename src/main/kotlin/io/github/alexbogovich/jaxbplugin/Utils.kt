@@ -13,7 +13,7 @@ data class SchemaDependency(val schema: SchemaInstance, val dependsOn: MutableLi
 
 fun getSchemaImport(node: Node): SchemaImport {
     return SchemaImport(node.attributes.getNamedItem("namespace").nodeValue,
-            node.attributes.getNamedItem("schemaLocation").nodeValue)
+            node.attributes.getNamedItem("schemaLocation")?.nodeValue ?: "")
 }
 
 
